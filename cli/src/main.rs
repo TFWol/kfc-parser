@@ -49,9 +49,11 @@ fn unpack(
     thread_count: u8
 ) -> anyhow::Result<()> {
     let start = std::time::Instant::now();
-
+    
+    println!("Input path: {}", input); // debug
     let enshrouded_dir = PathBuf::from(input);
-
+    println!("enshrouded path 1: {}", enshrouded_dir);
+    
 // Canonicalize the path
     let enshrouded_dir = match enshrouded_dir.canonicalize() {
         Ok(path) => path,
@@ -59,7 +61,8 @@ fn unpack(
             return Err(anyhow::anyhow!("Invalid input directory: {}", e));
         }
     };
-    
+    println!("enshrouded canc. path: {}", enshrouded_dir);
+        
     //...
     let output_dir = PathBuf::from(output);
 
