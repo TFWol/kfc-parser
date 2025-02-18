@@ -51,6 +51,16 @@ fn unpack(
     let start = std::time::Instant::now();
 
     let enshrouded_dir = PathBuf::from(input);
+
+// Canonicalize the path
+    let enshrouded_dir = match enshrouded_dir.canonicalize() {
+        Ok(path) => path,
+        Err(e) => {
+            return Err(anyhow::anyhow!("Invalid input directory: {}", e));
+        }
+    };
+    
+    //...
     let output_dir = PathBuf::from(output);
 
     if !enshrouded_dir.exists() {
