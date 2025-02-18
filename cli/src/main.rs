@@ -52,16 +52,18 @@ fn unpack(
     
     println!("Input path: {}", input); // debug
     let enshrouded_dir = PathBuf::from(input);
-    println!("enshrouded path 1: {}", enshrouded_dir);
+    println!("enshrouded path 1: {}", enshrouded_dir.display());
     
 // Canonicalize the path
     let enshrouded_dir = match enshrouded_dir.canonicalize() {
-        Ok(path) => path,
+        Ok(path) => {
+            println!("Canonicalized path: {}", path.display()); // Print the canonicalized path
+            path // Assign the canonicalized path to enshrouded_dir
+        }
         Err(e) => {
             return Err(anyhow::anyhow!("Invalid input directory: {}", e));
         }
     };
-    println!("enshrouded canc. path: {}", enshrouded_dir);
         
     //...
     let output_dir = PathBuf::from(output);
